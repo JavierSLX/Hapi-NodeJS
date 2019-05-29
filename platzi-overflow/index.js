@@ -10,11 +10,23 @@ const server = hapi.server({
 //Función para definir la ruta del servidor y arrancarlo
 async function init()
 {
+    //El objeto h es una coleccion de utilidades y propiedades a la información de respuesta (importantes: h.response, h.redirect) de response se tienen response.header, response.type, response.code
     server.route({
         method: 'GET',
         path: '/',
         handler: (request, h) => {
-            return 'Hola mundo'
+            //Regresa la respuesta con un codigo 200
+            return h.response('Hola mundo...').code(200);
+        }
+    });
+
+    //Nueva ruta que redirecciona
+    server.route({
+        method: 'GET',
+        path: '/redirect',
+        handler: (request, h) => {
+            //Regresa la respuesta con un codigo 200
+            return h.redirect('https://platzi.com');
         }
     });
 
